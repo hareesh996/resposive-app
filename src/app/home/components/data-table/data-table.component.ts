@@ -36,21 +36,19 @@ export class DataTableComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    if(this.columnData){
-      this.columnData = [];
-    }
-    this.matTableDataSource = new MatTableDataSource<any>(this.columnData);
+    this.matTableDataSource = new MatTableDataSource<any>([]);
   }
 
   ngOnChanges(simpleChanges: SimpleChanges){
-    if(simpleChanges.columnData && !simpleChanges.columnData.isFirstChange()){
+    if(simpleChanges.columnData){
       this.setColumnData(simpleChanges.columnData.currentValue);
     }
   }
 
   setColumnData(columnData: any[]){
     this.columnData = columnData;
-    this.matTableDataSource = new MatTableDataSource<any>(columnData);
+    this.matTableDataSource = new MatTableDataSource<any>();
+    this.matTableDataSource.data = columnData;
   }
 
 }
